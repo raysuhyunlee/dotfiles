@@ -6,12 +6,12 @@ alias glp="git log --graph --abbrev-commit --decorate --format=format:'%C(bold b
 alias ga="git add"
 alias grm="git rm"
 alias gb="git branch"
-alias gst="git status"
+alias gs="git status"
 alias gc="git commit"
 alias gp="git push"
 alias gm="git merge"
 alias gf="git fetch"
-alias gch="git checkout"
+alias gco="git checkout"
 alias gd="git diff --cached --name-only --"
 
 # Vim
@@ -19,4 +19,9 @@ alias suvi="sudo -E vi"
 
 # Docker & Kubernetes
 alias k="kubectl"
-alias dc = "docker-compose"
+alias dc="docker-compose"
+
+# Tmux
+alias t="tmux"
+alias ta="tmux attach"
+alias tls="tmux ls"
