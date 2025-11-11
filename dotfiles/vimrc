@@ -102,7 +102,6 @@ set completeopt-=preview
 set wildmenu
 
 
-
 " *** colorscheme settings ***
 
 " Set background brightness. Range: 233 (darkest) ~ 239 (brightest)

@@ -1,20 +1,23 @@
-# Suhyun's dotfiles
+# My dotfiles and personal cli settings
 
-## Installation
-First, clone the repository.
-
+## Setup
 ```sh
-$ git clone https://github.com/RaySuhyunLee/dotfiles.git
+$ git clone https://github.com/raysuhyunlee/dotfiles.git
+$ ./bootstrap-mac.sh
 ```
 
-Now, I prepared the magical bootstrap file for you.
+## Tools to Install
 
-```sh
-$ source bootstrap.sh
-```
+### Terminal
+* [bat](https://github.com/sharkdp/bat)
+* [oh-my-zsh](https://ohmyz.sh/)
+* [tmux](https://github.com/tmux/tmux)
 
-That easy!
+### Docker & Kubernetes
+* [docker](https://www.docker.com/products/docker-desktop/)
+* [k9s](https://k9scli.io/topics/install/)
 
-## Supported Platforms
-* Mac
-* Debian/Ubuntu(or other similar debian based linux)
+
+## Docker compose
+
+`docker-compose` folder contains commonly used docker-compose files.
