@@ -11,6 +11,17 @@ set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+cat <<'BANNER'
+
+  ____              _         _       _    __ _ _
+ |  _ \ __ _ _   _ ( )___    __| | ___ | |_ / _(_) | ___  ___
+ | |_) / _` | | | |/ / __|  / _` |/ _ \| __| |_| | |/ _ \/ __|
+ |  _ < (_| | |_| | \__ \ | (_| | (_) | |_|  _| | |  __/\__ \
+ |_| \_\__,_|\__, | |___/  \__,_|\___/ \__|_| |_|_|\___||___/
+             |___/
+
+BANNER
+
 # --- symlink helper: make parent dirs, back up real files, force-relink ---
 link() {
   local src="$1" dest="$2"
