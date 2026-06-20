@@ -1,7 +1,5 @@
 # My dotfiles and personal cli settings
 
-Font-agnostic: works with any terminal font (no powerline-patched font needed).
-
 ## Setup
 ```sh
 $ git clone https://github.com/raysuhyunlee/dotfiles.git
@@ -51,10 +49,6 @@ real files it would overwrite (`*.bak.<timestamp>`).
 | [dust](https://github.com/bootandy/dust) | disk usage (`du`) |
 | [duf](https://github.com/muesli/duf) | disk free (`df`) |
 | [procs](https://github.com/dalance/procs) | process viewer (`ps`) |
-
-### Docker & Kubernetes
-* [docker](https://www.docker.com/products/docker-desktop/)
-* [k9s](https://k9scli.io/topics/install/)
 
 ## Docker compose
 
