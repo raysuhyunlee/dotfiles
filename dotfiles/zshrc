@@ -8,31 +8,95 @@ if ! zgen saved; then
 	zgen oh-my-zsh plugins/mosh
 	zgen oh-my-zsh plugins/command-not-found
 	zgen load zsh-users/zsh-completions src
+	zgen load Aloxaf/fzf-tab          # fuzzy tab completion (after completions, before syntax-highlight)
 	zgen load zsh-users/zsh-syntax-highlighting
-	zgen oh-my-zsh themes/agnoster
+	zgen oh-my-zsh themes/robbyrussell
 	zgen save
 fi
 
-#export TERM=xterm-256color
-export ZSH_THEME=agnoster
+# robbyrussell: clean omz default, needs no powerline-patched font
+export ZSH_THEME=robbyrussell
 export DEFAULT_USER="$USER"
 
 alias c="clear"
 alias cl="clear;l"
 
-# for ls
+# ls
 alias l='ls'
 alias la='ls -a'
 alias ll='ls -lh'
 
-# for tmux
+# editor
+alias vi='nvim'
+alias vim='nvim'
+alias suvi="sudo -E nvim"
+
+# tmux
 alias t='tmux'
 alias ta='tmux attach'
 alias tl='tmux ls'
+alias tls='tmux ls'
 
-alias vi='vim'
+# git
+alias gi='git'
+alias gl="git log --graph --oneline --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'"
+alias ga="git add"
+alias grm="git rm"
+alias gb="git branch"
+alias gs="git status"
+alias gc="git commit"
+alias gp="git push"
+alias gpw='git push origin $(git branch --show-current)'  # push current branch
+alias gm="git merge"
+alias gf="git fetch"
+alias gco="git checkout"
+alias gd="git diff"
+alias gpr=". ~/.scripts/create-pr-from-branch.sh"
 
-# for git
-# for mac old version problem
-#export PATH="$(find /usr/local/Cellar -type d -name bin):${PATH}"
+# docker & kubernetes
+alias k="kubectl"
+alias dc="docker-compose"
+
+
+#
+# Modern CLI tools (each guarded — no-op if the tool isn't installed)
+#
+
+# Ubuntu ships fd/bat as fdfind/batcat; normalize the names.
+command -v fdfind  >/dev/null && alias fd='fdfind'
+command -v batcat  >/dev/null && alias bat='batcat'
+
+# bat: syntax-highlighted cat
+command -v bat >/dev/null && alias cat='bat --paging=never'
+
+# eza: modern ls (fallback to plain ls if absent)
+if command -v eza >/dev/null; then
+  alias l='eza'
+  alias la='eza -a'
+  alias ll='eza -lh --git'
+  alias lt='eza --tree --level=2'
+fi
+
+# zoxide: smarter cd — `z foo` jumps to most-used dir matching foo
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
+
+# fzf: Ctrl-T (files), Ctrl-R (history), Alt-C (cd), ** completion
+if command -v fzf >/dev/null; then
+  if fzf --zsh >/dev/null 2>&1; then
+    source <(fzf --zsh)                       # fzf >= 0.48
+  else
+    for f in /usr/share/doc/fzf/examples/key-bindings.zsh \
+             /usr/share/fzf/key-bindings.zsh \
+             "$(brew --prefix 2>/dev/null)/opt/fzf/shell/key-bindings.zsh"; do
+      [ -f "$f" ] && source "$f"
+    done
+  fi
+  # use fd for fzf when available: fast, respects .gitignore, includes dotfiles
+  if command -v fd >/dev/null || command -v fdfind >/dev/null; then
+    _fd="$(command -v fd || command -v fdfind)"
+    export FZF_DEFAULT_COMMAND="$_fd --type f --hidden --exclude .git"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="$_fd --type d --hidden --exclude .git"
+  fi
+fi
 
