@@ -9,9 +9,7 @@
 
 ## Setup
 ```sh
-$ git clone https://github.com/raysuhyunlee/dotfiles.git
-$ cd dotfiles
-$ ./install.sh
+./install.sh
 ```
 
 `install.sh` detects your OS (macOS / Ubuntu), installs packages, then symlinks
